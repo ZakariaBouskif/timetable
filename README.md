@@ -9,3 +9,6 @@ scheduler timetable (exams, classes, events, ..)
 
 🔗 Overlapping events are handled properly (not messy if two events happen at the same time).
 
+
+# DEMO
+![timetable](timetable.png)
