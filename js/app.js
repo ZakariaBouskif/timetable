@@ -67,7 +67,9 @@ const events = [
         url: "/courses/anatomy"
     }
 ];
+
 // Function to add events to timetable with a reference date
+// @TODO: support multi dates with navigation for each one
 function scheduleEvents(referenceDate) {
     events.forEach(event => {
         // Create date objects using the reference date
@@ -77,11 +79,8 @@ function scheduleEvents(referenceDate) {
         const endDate = new Date(referenceDate);
         endDate.setHours(event.endTime.hours, event.endTime.minutes, 0, 0);
         
-        // Adjust date to match the day of week
-        const dayOffset = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-                          .indexOf(event.day) - referenceDate.getDay();
-        startDate.setDate(startDate.getDate() + dayOffset);
-        endDate.setDate(endDate.getDate() + dayOffset);
+        startDate.setDate(startDate.getDate());
+        endDate.setDate(endDate.getDate());
 
         timetable.addTimeslot(
             event.id,
@@ -113,7 +112,6 @@ function scheduleEvents(referenceDate) {
 }
 
 scheduleEvents(new Date()); 
-
 
 var renderer = new Timetable.Renderer(timetable);
 renderer.draw('.timetable');
